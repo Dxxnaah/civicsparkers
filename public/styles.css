@@ -1,0 +1,387 @@
+/* ---------------------------------------------------------------
+   CivicSparkers — design tokens
+   Palette: cool civic paper + safety-amber accent (not warm cream,
+   not near-black/neon — a municipal ticket desk, not a startup).
+   Type: Archivo (display) + IBM Plex Mono (data / labels / stamps),
+   system sans for reading copy.
+   Signature: complaint cards styled as perforated case-file stubs
+   with a rotated rubber-stamp status badge.
+------------------------------------------------------------------ */
+
+:root {
+  --ink: #16223a;
+  --ink-soft: #3c4a63;
+  --paper: #e9edf0;
+  --paper-deep: #dde3e7;
+  --card: #ffffff;
+  --line: #c7cfd6;
+  --amber: #e2891f;
+  --amber-deep: #b96b12;
+  --green: #2f7a4d;
+  --green-bg: #e4f2e9;
+  --red: #b23a2e;
+
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+a { color: var(--amber-deep); }
+
+:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* --------------------------- masthead --------------------------- */
+
+.masthead {
+  background: var(--ink);
+  color: #fff;
+  padding: 2.75rem 1.5rem 3.25rem;
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px);
+}
+
+.masthead__wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.masthead__mark {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.masthead__spark {
+  font-size: 2.1rem;
+  color: var(--amber);
+  filter: drop-shadow(0 0 10px rgba(226,137,31,0.55));
+}
+
+.masthead__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a9b6cc;
+  margin: 0 0 0.2rem;
+}
+
+.masthead__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.masthead__tag {
+  max-width: 620px;
+  margin: 1.1rem 0 0;
+  color: #cfd7e6;
+  font-size: 1rem;
+}
+
+/* --------------------------- layout --------------------------- */
+
+.wrap {
+  max-width: 1040px;
+  margin: -1.75rem auto 0;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: 1fr; margin-top: -1rem; }
+}
+
+.desk, .log {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 24px -18px rgba(22,34,58,0.35);
+}
+
+.desk__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--line);
+}
+
+.desk__index {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--amber-deep);
+  border: 1px solid var(--amber-deep);
+  border-radius: 3px;
+  padding: 0.05rem 0.4rem;
+}
+
+.desk h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* --------------------------- form --------------------------- */
+
+.field { margin-bottom: 1.1rem; }
+
+.field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+
+.field__optional { text-transform: none; color: #8b96a8; }
+
+.field input[type="text"],
+.field textarea,
+.field select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #fbfcfd;
+  color: var(--ink);
+}
+
+.field textarea { resize: vertical; }
+
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--amber-deep);
+  background: #fff;
+}
+
+.field__note {
+  font-size: 0.8rem;
+  color: #6b7788;
+  margin: 0.5rem 0 0;
+}
+
+.dropzone {
+  position: relative;
+  border: 2px dashed var(--line);
+  border-radius: 4px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  background: #fbfcfd;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.dropzone.is-active {
+  border-color: var(--amber);
+  background: #fff6ea;
+}
+
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dropzone__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7788;
+}
+
+.dropzone__preview {
+  max-height: 160px;
+  border-radius: 3px;
+  margin-top: 0.6rem;
+}
+
+.submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  background: var(--amber-deep);
+  border: none;
+  border-radius: 3px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.submit-btn:hover { background: #a25e0f; }
+.submit-btn:active { transform: translateY(1px); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.submit-btn__spark { color: #ffd9a3; }
+
+.form-status {
+  min-height: 1.2rem;
+  margin: 0.75rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.form-status[data-tone="error"] { color: var(--red); }
+.form-status[data-tone="ok"] { color: var(--green); }
+
+/* --------------------------- case log --------------------------- */
+
+.log__empty {
+  color: #8b96a8;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.ticket-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.ticket {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fbfcfd;
+  display: grid;
+  grid-template-columns: 108px 1fr;
+}
+
+.ticket::before {
+  /* perforated edge between photo and details, referencing a torn ticket stub */
+  content: '';
+  position: absolute;
+  left: 108px;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 2px dashed var(--line);
+}
+
+.ticket__photo {
+  width: 108px;
+  height: 100%;
+  min-height: 108px;
+  object-fit: cover;
+  display: block;
+  background: var(--paper-deep);
+}
+
+.ticket__body {
+  padding: 0.85rem 0.95rem;
+  position: relative;
+}
+
+.ticket__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ticket__id {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #8b96a8;
+}
+
+.ticket__category {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin: 0.15rem 0 0.3rem;
+}
+
+.ticket__desc {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+
+.ticket__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #8b96a8;
+}
+
+.stamp {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+  border: 1.5px solid var(--amber-deep);
+  border-radius: 3px;
+  padding: 0.15rem 0.4rem;
+  transform: rotate(-4deg);
+  white-space: nowrap;
+}
+
+.stamp[data-status="Resolved"] {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* --------------------------- footer --------------------------- */
+
+.security-note {
+  background: var(--ink);
+  color: #cfd7e6;
+  padding: 2.5rem 1.5rem;
+}
+
+.security-note__wrap { max-width: 720px; margin: 0 auto; }
+
+.security-note__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin: 0 0 0.4rem;
+}
+
+.security-note h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 0.6rem;
+  color: #fff;
+}
+
+.security-note p:last-child { margin: 0; font-size: 0.95rem; }

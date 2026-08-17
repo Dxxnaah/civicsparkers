@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CivicSparkers — Municipal Complaint Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead__wrap">
+    <div class="masthead__mark">
+      <span class="masthead__spark">⚡</span>
+      <div>
+        <p class="masthead__eyebrow">Municipal Complaint Desk · Coimbatore</p>
+        <h1 class="masthead__title">CivicSparkers</h1>
+      </div>
+    </div>
+    <p class="masthead__tag">Report a civic issue — a broken streetlight, a pothole, a leak —
+      with a photo, a location, and a short note. Your case gets a ticket number and a place in the log below.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="desk" aria-labelledby="form-heading">
+    <div class="desk__head">
+      <span class="desk__index">01</span>
+      <h2 id="form-heading">File a report</h2>
+    </div>
+
+    <form id="complaint-form" class="ticket-form" novalidate>
+
+      <div class="field">
+        <label for="category">Issue type</label>
+        <select id="category" name="category" required>
+          <option value="Broken streetlight">Broken streetlight</option>
+          <option value="Pothole">Pothole</option>
+          <option value="Water leak / flooding">Water leak / flooding</option>
+          <option value="Garbage / sanitation">Garbage / sanitation</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="location">Location</label>
+        <input id="location" name="location" type="text" maxlength="200"
+               placeholder="e.g. Near Gandhipuram Town Bus Stand" required />
+      </div>
+
+      <div class="field">
+        <label for="description">What's happening</label>
+        <textarea id="description" name="description" maxlength="500" rows="4"
+                  placeholder="Describe the issue — when you noticed it, how bad it is, who it affects." required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="reporterName">Your name <span class="field__optional">(optional)</span></label>
+        <input id="reporterName" name="reporterName" type="text" maxlength="80" placeholder="Anonymous is fine" />
+      </div>
+
+      <div class="field">
+        <label for="photo">Photo evidence</label>
+        <div class="dropzone" id="dropzone" tabindex="0">
+          <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required />
+          <p class="dropzone__hint" id="dropzone-hint">Drop a photo here, or click to choose one — JPG, PNG or WEBP, up to 5&nbsp;MB.</p>
+          <img id="photo-preview" class="dropzone__preview" alt="Selected photo preview" hidden />
+        </div>
+        <p class="field__note">Every photo is checked at the byte level and re-encoded before it's stored — see <a href="#security">how, below</a>.</p>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <span>Submit report</span>
+        <span class="submit-btn__spark" aria-hidden="true">⚡</span>
+      </button>
+
+      <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="log" aria-labelledby="log-heading">
+    <div class="desk__head">
+      <span class="desk__index">02</span>
+      <h2 id="log-heading">Case log</h2>
+    </div>
+    <p class="log__empty" id="log-empty">No cases filed yet. Be the first spark.</p>
+    <div class="ticket-grid" id="ticket-grid"></div>
+  </section>
+
+</main>
+
+<footer class="security-note" id="security">
+  <div class="security-note__wrap">
+    <p class="security-note__eyebrow">Under the hood</p>
+    <h2>Why the photo upload is the hard part</h2>
+    <p>A file upload box is the widest door into a server most apps have. This one assumes every upload is hostile
+      until proven otherwise: the declared file type is never trusted, the bytes are checked against their real
+      signature, the image is decoded and rebuilt from scratch (which strips anything smuggled inside a
+      polyglot file), and the result is saved under a random name outside the public web root — never the
+      name or path the browser sent.</p>
+  </div>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
