@@ -1,3 +1,7 @@
+##  Live Demo
+
+[🌐 Open CivicSparkers Live] : (https://civicsparkers.onrender.com) 
+
 # CivicSparkers — Secure Civic Complaint Reporting System
 
 **Track:** Strong Institutions — civic complaint reporting
